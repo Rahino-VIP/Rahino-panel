@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>قطب‌نمای VIP راهینو</title>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <style>
+        :root { --pink: #d97b7b; --pink-light: #fbecec; --green: #7ca881; --green-light: #e5eee6; --bg: #f4f0ec; --text-dark: #2c3e50; --white: #ffffff; --shadow: 0 8px 25px rgba(124, 168, 129, 0.25); }
+        * { box-sizing: border-box; font-family: 'Vazirmatn', sans-serif; margin: 0; padding: 0; }
+        body { background: var(--bg); color: var(--text-dark); min-height: 100vh; display: flex; justify-content: center; padding: 20px; background-image: radial-gradient(var(--green-light) 2px, transparent 2px); background-size: 25px 25px; }
+        .container { background: rgba(255, 255, 255, 0.98); border-radius: 24px; padding: 30px; width: 100%; max-width: 450px; box-shadow: var(--shadow); border: 2px solid var(--white); }
+        .logo-box { text-align: center; margin-bottom: 20px; }
+        .logo-box img { width: 100px; height: 100px; border-radius: 50%; box-shadow: 0 5px 15px rgba(217, 123, 123, 0.4); object-fit: cover; border: 3px solid var(--white); }
+        h1 { text-align: center; font-size: 24px; margin-bottom: 5px; color: var(--text-dark); font-weight: 900;}
+        .subtitle { text-align: center; color: var(--green); font-size: 14px; margin-bottom: 25px; font-weight: bold;}
+        .section-title { color: var(--white); background: var(--pink); padding: 8px 15px; border-radius: 12px; font-size: 15px; margin: 25px 0 15px 0; display: inline-block; font-weight: bold; box-shadow: 0 4px 10px rgba(217, 123, 123, 0.3);}
+        .input-group { margin-bottom: 20px; }
+        label { display: block; font-size: 14px; margin-bottom: 8px; color: var(--text-dark); font-weight: bold; }
+        input[type="text"], input[type="password"], select, textarea { width: 100%; padding: 15px; border-radius: 14px; border: 2px solid var(--green-light); background: #fafbfc; color: var(--text-dark); outline: none; transition: 0.3s; font-size: 15px; font-weight: bold;}
+        input:focus, select:focus, textarea:focus { border-color: var(--pink); background: var(--white); box-shadow: 0 0 0 4px var(--pink-light); }
+        .slider-frame { background: var(--white); border: 2px solid var(--green-light); border-radius: 16px; padding: 18px; margin-bottom: 15px; box-shadow: inset 0 2px 6px rgba(0,0,0,0.03); }
+        input[type="range"] { width: 100%; -webkit-appearance: none; background: transparent; margin: 10px 0 5px 0; }
+        input[type="range"]:focus { outline: none; }
+        input[type="range"]::-webkit-slider-runnable-track { width: 100%; height: 12px; cursor: pointer; background: #e0e8e1; border-radius: 10px; border: 1px solid #c2d4c4; }
+        input[type="range"]::-webkit-slider-thumb { border: 3px solid var(--white); height: 28px; width: 28px; border-radius: 50%; background: var(--pink); cursor: pointer; -webkit-appearance: none; margin-top: -9px; box-shadow: 0 3px 6px rgba(0,0,0,0.3); }
+        .val-badge { display: inline-block; background: var(--pink-light); color: var(--pink); padding: 4px 10px; border-radius: 10px; font-weight: 900; float: left; font-size: 14px;}
+        .val-badge.green { background: var(--green-light); color: var(--green); }
+        .btn { width: 100%; padding: 16px; border-radius: 16px; border: none; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s; margin-top: 10px; }
+        .btn:active { transform: scale(0.96); }
+        .btn-primary { background: linear-gradient(135deg, var(--pink), #c76565); color: var(--white); box-shadow: 0 6px 20px rgba(217, 123, 123, 0.4); }
+        .btn-outline { background: var(--white); color: var(--green); border: 2px dashed var(--green); margin-bottom: 10px; }
+        .btn-danger { background: #ffeded; color: #d9534f; padding: 12px; border-radius: 12px; margin-top: 15px; border: 1px solid #fadcdc; font-weight: bold;}
+        .menu-card { background: var(--white); border: 2px solid var(--green-light); border-radius: 20px; padding: 20px; text-align: center; margin-bottom: 15px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+        .menu-card:hover { border-color: var(--pink); box-shadow: 0 8px 25px rgba(217, 123, 123, 0.15); transform: translateY(-3px); }
+        .menu-icon { font-size: 35px; display: block; }
+        .course-box { background: #fdfdfd; border: 2px solid var(--green-light); padding: 20px; border-radius: 20px; margin-bottom: 20px; }
+        #homeMenu, #dateScreen, #dashboard, #successScreen, #analyticsScreen, #historyListScreen, #dayDetailScreen, #weeklyListScreen, #weeklyDetailScreen, #requestScreen { display: none; }
+        .mood-container { display: flex; justify-content: space-between; gap: 10px; }
+        .mood-btn { flex: 1; padding: 15px 5px; border-radius: 16px; background: #fafbfc; border: 2px solid var(--green-light); cursor: pointer; text-align: center; }
+        .mood-btn.active { border-color: var(--pink); background: var(--pink-light); transform: translateY(-5px); box-shadow: 0 6px 15px rgba(217, 123, 123, 0.2); }
+    </style>
+</head>
+<body>
+
+    <div class="container" id="loginScreen">
+        <div class="logo-box"><img src="https://via.placeholder.com/150/d97b7b/ffffff?text=Rahino" alt="Rahino"></div>
+        <h1>قطب‌نمای راهینو</h1><p class="subtitle">ورود به سیستم رهگیری شخصی</p>
+        <div class="input-group"><label>کد ملی / آیدی:</label><input type="text" id="userId" placeholder="مثال: 0123456789" style="direction: ltr;"></div>
+        <div class="input-group"><label>رمز عبور:</label><input type="password" id="userPass" placeholder="••••" style="direction: ltr;"></div>
+        <button class="btn btn-primary" onclick="login()" id="loginBtn">تایید و ورود</button>
+    </div>
+
+    <div class="container" id="homeMenu">
+        <div class="logo-box"><span style="font-size: 50px;">🧭</span></div>
+        <h1 id="userNameDisplay">خوش آمدی</h1><p class="subtitle" id="userGradeDisplay" style="margin-bottom: 25px;"></p>
+
+        <div class="menu-card" onclick="openWeeklyList()" style="border-color: #fca311; background: #fffdf5;">
+            <span class="menu-icon">👑</span>
+            <h3 style="color: #fca311;">تحلیل اختصاصی شما</h3><p style="color: var(--pink);">کارنامه، نمودارها و توصیه‌های هسته تحلیل</p>
+        </div>
+        <div class="menu-card" onclick="openDateScreen()"><span class="menu-icon">📝</span><h3>ثبت گزارش جدید</h3><p>ساعت مطالعه، تست‌ها و لایف‌استایل</p></div>
+        <div class="menu-card" onclick="openHistoryList()"><span class="menu-icon">📅</span><h3>تاریخچه و کارنامه روزانه</h3><p>مرور جزئیات روزهای گذشته</p></div>
+        <div class="menu-card" onclick="openAnalytics()"><span class="menu-icon">📈</span><h3>روند پیشرفت من</h3><p>نمودار عملکرد سالانه و سهم دروس</p></div>
+    </div>
+
+    <div class="container" id="weeklyListScreen">
+        <div class="logo-box"><span style="font-size: 50px;">💌</span></div><h1 style="color: #fca311;">صندوق پیام راهینو</h1><p class="subtitle">پیام‌ها و تحلیل‌های اختصاصی شما</p>
+        <div id="pendingAlert" style="display:none; background:#fff3cd; color:#856404; padding:15px; border-radius:12px; font-size:13px; text-align:center; margin-bottom:15px;">⏳ درخواست در صف بررسی است.</div>
+        <button class="btn btn-primary" id="btnRequestAnalysis" onclick="openRequestScreen()" style="background: linear-gradient(135deg, #fca311, #e08e0b); margin-bottom: 15px;">➕ درخواست تحلیل برای هفته گذشته</button>
+        <div id="weeklyButtonsContainer"></div><p id="weeklyStatus" style="text-align: center; font-size: 13px; font-weight: bold;"></p>
+        <button class="btn btn-outline" style="margin-top: 15px; border:none;" onclick="goToMenu('weeklyListScreen')">❌ بازگشت</button>
+    </div>
+
+    <div class="container" id="requestScreen">
+        <div class="logo-box"><span style="font-size: 50px;">🎙️</span></div><h1 style="color: #fca311;">ثبت درخواست تحلیل</h1><p class="subtitle" id="requestDatesText"></p>
+        <div class="input-group"><label>این هفته بر تو چه گذشت؟ (اختیاری)</label><textarea id="studentReflection" rows="4"></textarea></div>
+        <button class="btn btn-primary" style="background: #fca311;" onclick="submitAnalysisRequest()" id="reqBtn">ارسال به هسته پردازش</button>
+        <button class="btn btn-outline" style="border:none;" onclick="document.getElementById('requestScreen').style.display='none'; document.getElementById('weeklyListScreen').style.display='block';">❌ انصراف</button>
+    </div>
+
+    <div class="container" id="weeklyDetailScreen">
+        <h1 id="weeklyTitleText" style="margin-bottom: 5px; color: #fca311;"></h1><p id="weeklyDateText" style="text-align:center; font-size:12px; color:var(--text-dark); margin-bottom:15px;"></p>
+        <div style="background: var(--white); padding: 15px; border-radius: 15px; border: 2px solid #fca311; margin-bottom: 15px;"><p style="text-align:center; font-size:12px; font-weight:bold; margin-bottom:10px; color:#fca311;">عملکرد ۷ روزه مرتبط</p><canvas id="weeklyComboChart"></canvas></div>
+        <div style="background: #fffdf5; padding: 25px; border-radius: 15px; border: 2px dashed #fca311; margin-bottom: 20px; text-align: right; line-height: 2;"><p id="weeklyBodyText" style="color: var(--text-dark); font-size: 15px; white-space: pre-wrap; font-weight: 500;"></p></div>
+        <button class="btn btn-primary" style="background: linear-gradient(135deg, #fca311, #e08e0b);" onclick="document.getElementById('weeklyDetailScreen').style.display='none'; document.getElementById('weeklyListScreen').style.display='block';">بازگشت</button>
+    </div>
+
+    <div class="container" id="analyticsScreen">
+        <div class="logo-box"><span style="font-size: 50px;">📊</span></div><h1>روند پیشرفت شما</h1>
+        <div style="background: var(--white); padding: 15px; border-radius: 15px; border: 2px solid var(--green-light); margin-bottom: 20px;"><p style="text-align:center; font-size:12px; font-weight:bold; margin-bottom:10px;">روند مطالعه و تست</p><canvas id="longTermComboChart"></canvas></div>
+        <div style="background: var(--white); padding: 15px; border-radius: 15px; border: 2px solid var(--green-light); margin-bottom: 20px;"><p style="text-align:center; font-size:12px; font-weight:bold; margin-bottom:10px;">سهم دروس</p><canvas id="allTimePieChart"></canvas></div>
+        <p id="chartStatus" style="text-align: center; font-size: 13px; font-weight: bold; display: none;"></p><button class="btn btn-primary" onclick="goToMenu('analyticsScreen')">بازگشت</button>
+    </div>
+
+    <div class="container" id="dateScreen"><div class="logo-box"><span style="font-size: 50px;">🗓️</span></div><h1>انتخاب روز</h1><div class="input-group"><select id="dateSelect" size="7" style="height: auto; padding: 10px;"></select></div><button class="btn btn-primary" onclick="checkDate()" id="dateBtn">ورود به فرم</button><button class="btn btn-outline" onclick="goToMenu('dateScreen')" style="border:none;">❌ انصراف</button></div>
+    <div class="container" id="historyListScreen"><div class="logo-box"><span style="font-size: 50px;">🕰️</span></div><h1>گزارش‌های اخیر</h1><div id="historyButtonsContainer"></div><p id="historyStatus" style="text-align: center; font-size: 13px; font-weight: bold;"></p><button class="btn btn-outline" style="margin-top: 15px; border:none;" onclick="goToMenu('historyListScreen')">❌ بازگشت</button></div>
+    <div class="container" id="dayDetailScreen"><h1 id="detailDateText" style="margin-bottom: 10px; color: var(--pink);"></h1><div style="background: var(--white); padding: 15px; border-radius: 15px; border: 2px solid var(--green-light); margin-bottom: 20px;"><canvas id="pieChart"></canvas></div><div style="background: var(--white); padding: 15px; border-radius: 15px; border: 2px solid var(--green-light); margin-bottom: 20px;"><canvas id="barChart"></canvas></div><div id="dayDetailText"></div><button class="btn btn-primary" onclick="document.getElementById('dayDetailScreen').style.display='none'; document.getElementById('historyListScreen').style.display='block';">بازگشت</button></div>
+    
+    <div class="container" id="dashboard">
+        <h1 style="font-size: 20px;">ثبت گزارش</h1><p id="dashDateText" class="subtitle" style="color:var(--pink);"></p>
+        <div class="section-title">📚 درسی</div><div id="courseContainer"></div><button class="btn btn-outline" onclick="addCourseRow()">➕ اضافه کردن درس</button>
+        <div class="section-title">🌿 لایف‌استایل</div>
+        <div class="slider-frame"><label>خواب دیشب <span class="val-badge green" id="v_sleepLast">23:00</span></label><input type="range" id="life_sleepLast" min="21" max="27" step="0.5" value="23" oninput="updateTimeLabel(this.value, 'v_sleepLast')"></div>
+        <div class="slider-frame"><label>بیداری امروز <span class="val-badge green" id="v_wakeToday">07:00</span></label><input type="range" id="life_wakeToday" min="4" max="12" step="0.5" value="7" oninput="updateTimeLabel(this.value, 'v_wakeToday')"></div>
+        <div class="slider-frame"><label>گوشی <span class="val-badge" id="v_phone">1.5 ساعت</span></label><input type="range" id="life_phone" min="0" max="4" step="0.5" value="1.5" oninput="document.getElementById('v_phone').innerText = this.value + (this.value==4?'+':'') + ' ساعت'"></div>
+        <div class="slider-frame"><label>چرت <span class="val-badge" id="v_nap">0 ساعت</span></label><input type="range" id="life_nap" min="0" max="4" step="0.5" value="0" oninput="document.getElementById('v_nap').innerText = this.value + (this.value==4?'+':'') + ' ساعت'"></div>
+        <div class="input-group"><label>وضعیت روحی:</label><div class="mood-container"><div class="mood-btn" onclick="setMood(this, 'فوق‌العاده')"><span>✨</span></div><div class="mood-btn active" onclick="setMood(this, 'خوب')"><span>🍃</span></div><div class="mood-btn" onclick="setMood(this, 'خسته')"><span>☕</span></div><div class="mood-btn" onclick="setMood(this, 'بی‌انرژی')"><span>🔋</span></div></div><input type="hidden" id="life_mood" value="خوب"></div>
+        <button class="btn btn-primary" id="submitBtn" onclick="submitData()">🚀 ثبت نهایی</button><button class="btn btn-outline" style="border:none;" onclick="goToMenu('dashboard')">❌ انصراف</button>
+    </div>
+
+    <div class="container" id="successScreen"><div class="logo-box"><span style="font-size: 80px;">🏆</span></div><h2 style="text-align:center;">عملیات موفق</h2><div style="background: var(--green-light); padding: 20px; border-radius: 16px;"><p id="feedbackText" style="text-align:center; font-weight: bold;"></p></div><button class="btn btn-outline" style="margin-top:30px;" onclick="goToMenu('successScreen')">بازگشت</button></div>
+
+    <script>
+        // =====================================================================
+        // 🔗 پل ارتباطی جدید ما با گوگل (API Fetch)
+        // ⚠️ مهم: لینک جدید Web App خود را اینجا قرار دهید:
+        const SCRIPT_URL = "YOUR_WEB_APP_URL_HERE"; 
+        // =====================================================================
+
+        async function apiCall(actionName, dataObj) {
+            try {
+                let response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // ترفند مخفی برای رد شدن از سد امنیتی مرورگر
+                    body: JSON.stringify({ action: actionName, data: dataObj }),
+                    redirect: "follow"
+                });
+                return await response.json();
+            } catch (error) {
+                console.error(error);
+                throw new Error("ارتباط با هسته مرکزی قطع شد.");
+            }
+        }
+
+        const subjectsData = { "دهم": { "ریاضی": ["هندسه 1", "ریاضی 1", "فیزیک 1", "شیمی 1", "فارسی 1", "عربی 1", "دینی 1", "زبان 1"], "تجربی": ["زیست 1", "ریاضی 1", "فیزیک 1", "شیمی 1"], "انسانی": ["ریاضی و آمار 1", "اقتصاد"] }, "یازدهم": { "ریاضی": ["حسابان 1", "هندسه 2", "آمار و احتمال", "فیزیک 2", "شیمی 2"], "تجربی": ["زیست 2", "ریاضی 2", "فیزیک 2", "شیمی 2"], "انسانی": ["علوم و فنون 2"] }, "دوازدهم": { "ریاضی": ["حسابان 2", "هندسه 3", "گسسته", "فیزیک 3", "شیمی 3"], "تجربی": ["زیست 3", "ریاضی 3", "فیزیک 3", "شیمی 3"], "انسانی": ["علوم و فنون 3"] } };
+        let currentUser = ""; let selectedDate = ""; let courseCount = 0; let globalSubjects = []; 
+        let longTermChart = null; let allTimePie = null; let pieChart = null; let testBarChart = null; let aiWeeklyChart = null;
+        let userHistoryCache = []; let weeklyAnalysesCache = []; let rawRecordsCache = []; let lastCalendarWeekDates = [];
+
+        function login() {
+            var userId = document.getElementById("userId").value; var userPass = document.getElementById("userPass").value; var btn = document.getElementById("loginBtn");
+            if(!userId || !userPass) return alert("لطفاً آیدی و رمز را وارد کنید.");
+            btn.innerText = "در حال احراز هویت..."; btn.disabled = true;
+
+            apiCall("loginUser", {userId: userId, password: userPass})
+            .then(res => {
+                if(res.status === "Success") {
+                    currentUser = res.name; 
+                    document.getElementById("userNameDisplay").innerText = "خوش آمدی، " + res.name.split(" ")[0];
+                    document.getElementById("userGradeDisplay").innerText = res.grade + " " + res.field;
+                    extractSubjects(res.grade, res.field);
+                    document.getElementById("loginScreen").style.display = "none";
+                    document.getElementById("homeMenu").style.display = "block";
+                    generateShamsiDates(); calculateLastSaturdayToFriday(); 
+                } else { alert("خطای ورود. رمز یا آیدی اشتباه است."); btn.innerText = "تایید و ورود"; btn.disabled = false; }
+            }).catch(err => { alert(err.message); btn.innerText = "تایید و ورود"; btn.disabled = false; });
+        }
+
+        function goToMenu(currentScreen) { document.getElementById(currentScreen).style.display = "none"; document.getElementById("homeMenu").style.display = "block"; }
+        
+        function calculateLastSaturdayToFriday() {
+            lastCalendarWeekDates = [];
+            let today = new Date(); let dayOfWeek = today.getDay(); let offsetToFriday = (dayOfWeek + 2) % 7; 
+            for(let i = 0; i < 7; i++) {
+                let d = new Date(); d.setDate(d.getDate() - (offsetToFriday + i));
+                let shamsi = new Intl.DateTimeFormat('fa-IR', {year: 'numeric', month: '2-digit', day: '2-digit'}).format(d);
+                lastCalendarWeekDates.push(shamsi.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)));
+            }
+        }
+
+        function openWeeklyList() {
+            goToMenu('homeMenu'); document.getElementById("homeMenu").style.display = "none"; document.getElementById("weeklyListScreen").style.display = "block";
+            let container = document.getElementById("weeklyButtonsContainer"); let status = document.getElementById("weeklyStatus");
+            container.innerHTML = ""; status.innerText = "در حال ارتباط با هسته هوشمند...";
+            document.getElementById("pendingAlert").style.display = "none"; document.getElementById("btnRequestAnalysis").style.display = "none";
+
+            apiCall("getWeeklyAnalysesWithData", {userName: currentUser}).then(res => {
+                status.innerText = "";
+                if(res.status === "Success") {
+                    weeklyAnalysesCache = res.analyses; rawRecordsCache = res.records;
+                    res.analyses.forEach((weekData, index) => {
+                        let btn = document.createElement("div"); btn.className = "menu-card"; btn.style.borderColor = "#fca311";
+                        btn.innerHTML = `<h3 style="margin:0; color:#fca311;">${weekData.weekName}</h3>`; btn.onclick = () => openWeeklyDetail(index);
+                        container.appendChild(btn);
+                    });
+                    if(res.pending === "Pending") document.getElementById("pendingAlert").style.display = "block"; else document.getElementById("btnRequestAnalysis").style.display = "block";
+                } else { status.innerText = "هنوز راه‌اندازی نشده است."; }
+            }).catch(err => { status.innerText = "خطا در دریافت اطلاعات."; });
+        }
+
+        function openRequestScreen() {
+            document.getElementById("weeklyListScreen").style.display = "none"; document.getElementById("requestScreen").style.display = "block";
+            document.getElementById("requestDatesText").innerText = "عملکرد " + lastCalendarWeekDates[6] + " الی " + lastCalendarWeekDates[0];
+        }
+
+        function submitAnalysisRequest() {
+            let reflection = document.getElementById("studentReflection").value;
+            let weekName = "هفته " + lastCalendarWeekDates[6] + " تا " + lastCalendarWeekDates[0];
+            let btn = document.getElementById("reqBtn"); btn.innerText = "در حال ارسال..."; btn.disabled = true;
+
+            apiCall("requestWeeklyAnalysis", {userName: currentUser, weekName: weekName, studentReflection: reflection, targetDates: lastCalendarWeekDates}).then(res => {
+                btn.innerText = "ارسال به هسته پردازش"; btn.disabled = false;
+                if(res.status === "Queued") { document.getElementById("requestScreen").style.display = "none"; openWeeklyList(); } 
+                else if(res.status === "NotEnoughDays") alert("⚠️ حداقل ۶ روز گزارش نیاز است. شما: " + res.daysCount + " روز.");
+                else if(res.status === "AlreadyRequested") alert("قبلاً درخواست داده‌اید.");
+                else alert("خطا در ارسال.");
+            }).catch(err => { alert(err.message); btn.innerText = "ارسال"; btn.disabled = false; });
+        }
+
+        function openWeeklyDetail(index) {
+            let data = weeklyAnalysesCache[index];
+            document.getElementById("weeklyListScreen").style.display = "none"; document.getElementById("weeklyDetailScreen").style.display = "block";
+            document.getElementById("weeklyTitleText").innerText = data.weekName;
+            let cleanText = data.text.replace(/###/g, '').replace(/##/g, '').replace(/#/g, '').replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--pink); font-size:16px;">$1</strong>').replace(/\*(.*?)\*/g, '<strong style="color:var(--pink); font-size:16px;">$1</strong>');
+            document.getElementById("weeklyBodyText").innerHTML = cleanText; 
+
+            let weekMatch = data.weekName.match(/(\d{4}\/\d{2}\/\d{2})/g);
+            let filteredRecords = rawRecordsCache;
+            if(weekMatch && weekMatch.length >= 2) { filteredRecords = rawRecordsCache.filter(r => r.date >= weekMatch[0] && r.date <= weekMatch[1]); } 
+            else { let targetDates = [...new Set(rawRecordsCache.map(r => r.date))].sort().reverse().slice(0,7); filteredRecords = rawRecordsCache.filter(r => targetDates.includes(r.date)); }
+
+            let daily = {}; filteredRecords.forEach(r => { if(!daily[r.date]) daily[r.date] = {time:0, tests:0}; daily[r.date].time += r.time; daily[r.date].tests += r.tests; });
+            let dates = Object.keys(daily).sort(); let times = dates.map(d => daily[d].time); let tests = dates.map(d => daily[d].tests); let shortDates = dates.map(d => d.split('/').slice(1).join('/'));
+
+            let ctxWeekly = document.getElementById('weeklyComboChart').getContext('2d'); if(aiWeeklyChart) aiWeeklyChart.destroy();
+            aiWeeklyChart = new Chart(ctxWeekly, { type: 'bar', data: { labels: shortDates, datasets: [ { type: 'line', label: 'تعداد تست', data: tests, borderColor: '#fca311', backgroundColor: '#fca311', yAxisID: 'y1', tension: 0.3, borderWidth: 3 }, { type: 'bar', label: 'ساعت مطالعه', data: times, backgroundColor: '#a3b18a', borderRadius: 4, yAxisID: 'y' } ] }, options: { responsive: true, scales: { y: { type: 'linear', position: 'right', title: {display:true, text:'ساعت'} }, y1: { type: 'linear', position: 'left', title: {display:true, text:'تست'}, grid: {drawOnChartArea: false} } } } });
+        }
+
+        function openAnalytics() {
+            goToMenu('homeMenu'); document.getElementById("homeMenu").style.display = "none"; document.getElementById("analyticsScreen").style.display = "block";
+            let ctxCombo = document.getElementById('longTermComboChart').getContext('2d'); let ctxPie = document.getElementById('allTimePieChart').getContext('2d');
+            if(longTermChart) longTermChart.destroy(); if(allTimePie) allTimePie.destroy();
+            document.getElementById("chartStatus").style.display = "block"; document.getElementById("chartStatus").innerText = "در حال پردازش داده‌ها...";
+            
+            apiCall("getUserAnalytics", {userName: currentUser}).then(res => {
+                if(res.status === "Success" && res.weekly.labels.length > 0) {
+                    document.getElementById("chartStatus").style.display = "none";
+                    longTermChart = new Chart(ctxCombo, { type: 'bar', data: { labels: res.weekly.labels, datasets: [ { type: 'line', label: 'تعداد تست', data: res.weekly.tests, borderColor: '#4ea8de', backgroundColor: '#4ea8de', yAxisID: 'yTests', tension: 0.3, borderWidth: 3 }, { type: 'bar', label: 'ساعت مطالعه', data: res.weekly.study, backgroundColor: '#d97b7b', borderRadius: 4, yAxisID: 'yStudy' } ] }, options: { responsive: true, scales: { yStudy: { type: 'linear', position: 'right', title: {display:true, text:'ساعت'} }, yTests: { type: 'linear', position: 'left', title: {display:true, text:'تست'}, grid: { drawOnChartArea: false } } } } });
+                    allTimePie = new Chart(ctxPie, { type: 'doughnut', data: { labels: res.subjects.labels, datasets: [{ data: res.subjects.study, backgroundColor: ['#d97b7b', '#7ca881', '#fca311', '#4ea8de', '#9bb1ff', '#e63946', '#a3b18a', '#1c2541', '#ffb703'], borderWidth: 2 }] } });
+                } else { document.getElementById("chartStatus").innerText = "هنوز گزارش کافی ندارید."; }
+            }).catch(err => { document.getElementById("chartStatus").innerText = "خطا در ارتباط."; });
+        }
+
+        function openHistoryList() {
+            goToMenu('homeMenu'); document.getElementById("homeMenu").style.display = "none"; document.getElementById("historyListScreen").style.display = "block";
+            let container = document.getElementById("historyButtonsContainer"); let status = document.getElementById("historyStatus");
+            container.innerHTML = ""; status.innerText = "در حال دریافت تاریخچه...";
+            
+            apiCall("getUserHistory", {userName: currentUser}).then(res => {
+                if(res.status === "Success" && res.history.length > 0) {
+                    status.innerText = ""; userHistoryCache = res.history; 
+                    res.history.forEach((dayData, index) => {
+                        let btn = document.createElement("div"); btn.className = "menu-card"; btn.style.padding = "15px";
+                        btn.innerHTML = `<h3 style="margin:0;">گزارش ${dayData.date}</h3>`; btn.onclick = () => {
+                            document.getElementById("historyListScreen").style.display = "none"; document.getElementById("dayDetailScreen").style.display = "block";
+                            document.getElementById("detailDateText").innerText = "کارنامه " + dayData.date;
+                            let ctxPie = document.getElementById('pieChart').getContext('2d'); if(pieChart) pieChart.destroy();
+                            pieChart = new Chart(ctxPie, { type: 'doughnut', data: { labels: dayData.courses.map(c => c.name), datasets: [{ data: dayData.courses.map(c => c.edu + c.std), backgroundColor: ['#d97b7b', '#7ca881', '#fca311', '#4ea8de', '#e63946'], borderWidth: 2 }] } });
+                            let ctxBar = document.getElementById('barChart').getContext('2d'); if(testBarChart) testBarChart.destroy();
+                            testBarChart = new Chart(ctxBar, { type: 'bar', data: { labels: dayData.courses.map(c => c.name), datasets: [{ label: 'تعداد تست', data: dayData.courses.map(c => c.tests), backgroundColor: '#7ca881', borderRadius: 8 }] } });
+                            let textHtml = `<h3 class="section-title" style="margin-top:10px;">📋 ریز نمرات</h3>`;
+                            dayData.courses.forEach(c => { textHtml += `<div style="text-align:right; border:1px solid #ccc; padding:10px; margin-bottom:5px; border-radius:10px;"><strong>📘 ${c.name}</strong><br><small>آموزش: ${c.edu} | مطالعه: ${c.std} | تست: ${c.tests}</small></div>`; });
+                            document.getElementById("dayDetailText").innerHTML = textHtml;
+                        };
+                        container.appendChild(btn);
+                    });
+                } else { status.innerText = "هنوز گزارشی ندارید."; }
+            }).catch(err => { status.innerText = "خطا در ارتباط."; });
+        }
+
+        function generateShamsiDates() {
+            let select = document.getElementById("dateSelect"); select.innerHTML = ""; 
+            let labels = ["امروز", "دیروز", "پریروز", "۳ روز پیش", "۴ روز پیش", "۵ روز پیش", "۶ روز پیش"];
+            for(let i=0; i<7; i++) {
+                let d = new Date(); d.setDate(d.getDate() - i);
+                let shamsi = new Intl.DateTimeFormat('fa-IR', {year: 'numeric', month: '2-digit', day: '2-digit'}).format(d);
+                let shamsiEng = shamsi.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
+                let opt = document.createElement("option"); opt.value = shamsiEng; opt.text = `${labels[i]}  (${shamsi})`;
+                if(i === 0) opt.selected = true; select.appendChild(opt);
+            }
+        }
+
+        function openDateScreen() { goToMenu('homeMenu'); document.getElementById("homeMenu").style.display = "none"; document.getElementById("dateScreen").style.display = "block"; }
+        function checkDate() {
+            let sel = document.getElementById("dateSelect"); selectedDate = sel.value; let btn = document.getElementById("dateBtn");
+            btn.innerText = "در حال بررسی..."; btn.disabled = true;
+            
+            apiCall("checkDuplicateDate", {userName: currentUser, targetDate: selectedDate}).then(res => {
+                btn.innerText = "بررسی و ورود"; btn.disabled = false;
+                if (res.status === "Duplicate") { alert("⚠️ تو قبلاً این گزارش رو ثبت کردی."); } 
+                else if (res.status === "Clear") {
+                    document.getElementById("dashDateText").innerText = "گزارش برای: " + sel.options[sel.selectedIndex].text;
+                    document.getElementById("dateScreen").style.display = "none"; document.getElementById("dashboard").style.display = "block";
+                    if(courseCount === 0) addCourseRow(); 
+                }
+            }).catch(err => { alert(err.message); btn.innerText = "بررسی و ورود"; btn.disabled = false; });
+        }
+
+        function extractSubjects(grade, field) {
+            let targetGrade = grade.includes("یازدهم") ? "یازدهم" : (grade.includes("دوازدهم") || grade.includes("پشت کنکور")) ? "دوازدهم" : "دهم";
+            let targetField = field.includes("ریاضی") ? "ریاضی" : field.includes("انسانی") ? "انسانی" : "تجربی";
+            globalSubjects = subjectsData[targetGrade][targetField] || ["درس عمومی"];
+            if(targetGrade === "دوازدهم") globalSubjects.push("فرهنگیان 🧭");
+        }
+
+        function updateTimeLabel(val, labelId) {
+            let h = Math.floor(val); let m = (val - h) * 60; if (h >= 24) h -= 24;
+            document.getElementById(labelId).innerText = (h < 10 ? '0'+h : h) + ':' + (m === 0 ? '00' : '30');
+        }
+
+        function addCourseRow() {
+            courseCount++; let div = document.createElement("div"); div.className = "course-item course-box"; div.id = "course_" + courseCount;
+            let optionsHtml = globalSubjects.map(s => `<option value="${s}">${s}</option>`).join('');
+            div.innerHTML = `<div class="input-group"><label style="color:var(--pink);">نام درس:</label><select class="c-name">${optionsHtml}</select></div><div class="slider-frame"><label>آموزشی <span class="val-badge" id="v_edu_${courseCount}">0</span></label><input type="range" class="c-edu" min="0" max="12" step="0.5" value="0" oninput="document.getElementById('v_edu_${courseCount}').innerText = this.value"></div><div class="slider-frame"><label>مطالعه شخصی <span class="val-badge green" id="v_std_${courseCount}">0</span></label><input type="range" class="c-std" min="0" max="12" step="0.5" value="0" oninput="document.getElementById('v_std_${courseCount}').innerText = this.value"></div><div class="slider-frame"><label>تست <span class="val-badge" id="v_tst_${courseCount}">0</span></label><input type="range" class="c-tst" min="0" max="400" step="5" value="0" oninput="document.getElementById('v_tst_${courseCount}').innerText = this.value"></div>${courseCount > 1 ? `<button class="btn-danger" onclick="document.getElementById('${div.id}').remove()">حذف درس</button>` : ''}`;
+            document.getElementById("courseContainer").appendChild(div);
+        }
+
+        function setMood(elem, val) { document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active')); elem.classList.add('active'); document.getElementById("life_mood").value = val; }
+
+        function submitData() {
+            let btn = document.getElementById("submitBtn"); let courseData = [];
+            document.querySelectorAll(".course-item").forEach(box => {
+                let name = box.querySelector(".c-name").value; let edu = box.querySelector(".c-edu").value || 0; let std = box.querySelector(".c-std").value || 0; let tst = box.querySelector(".c-tst").value || 0;
+                if(edu > 0 || std > 0 || tst > 0) courseData.push({ name: name, edu: edu, study: std, tests: tst });
+            });
+            if(courseData.length === 0) return alert("اطلاعات حداقل یک درس را تنظیم کنید!");
+
+            let finalPayload = {
+                userName: currentUser, reportDate: selectedDate, courses: courseData,
+                lifestyle: { sleepLast: document.getElementById("v_sleepLast").innerText, wakeToday: document.getElementById("v_wakeToday").innerText, nap: document.getElementById("life_nap").value, phone: document.getElementById("life_phone").value, mood: document.getElementById("life_mood").value }
+            };
+
+            btn.innerText = "در حال انتقال..."; btn.disabled = true;
+            
+            apiCall("submitComplexReport", finalPayload).then(res => {
+                if (res.status === "Success") { goToMenu('dashboard'); document.getElementById("successScreen").style.display = "block"; document.getElementById("feedbackText").innerText = res.feedback; } 
+                else { alert("خطا: " + res.message); btn.innerText = "🚀 ثبت نهایی"; btn.disabled = false; }
+            }).catch(err => { alert(err.message); btn.innerText = "🚀 ثبت نهایی"; btn.disabled = false; });
+        }
+    </script>
+</body>
+</html>
