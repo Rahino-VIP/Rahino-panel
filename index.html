@@ -149,7 +149,7 @@
             .then(res => {
                 if(res.status === "Success") {
                     currentUser = res.name; 
-                    document.getElementById("userNameDisplay").innerText = res.name.split(" ")[0] + "،خوش آمدی " + " عزیز ";
+                    document.getElementById("userNameDisplay").innerText = res.name.split(" ")[0] + "عزیز، خوش آمدی ";
                     document.getElementById("userGradeDisplay").innerText = res.grade + " " + res.field;
                     extractSubjects(res.grade, res.field);
                     document.getElementById("loginScreen").style.display = "none";
