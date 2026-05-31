@@ -46,7 +46,7 @@
 <body>
 
     <div class="container" id="loginScreen">
-        <div class="logo-box"><img src="https://via.placeholder.com/150/d97b7b/ffffff?text=Rahino" alt="Rahino"></div>
+        <div class="logo-box"><img src="https://s8.uupload.ir/files/gemini_generated_image_9ff8pw9ff8pw9ff8_txlq.png" alt="Rahino"></div>
         <h1>قطب‌نمای راهینو</h1><p class="subtitle">ورود به سیستم رهگیری شخصی</p>
         <div class="input-group"><label>آیدی:</label><input type="text" id="userId" placeholder="مثال: 0123456789" style="direction: ltr;"></div>
         <div class="input-group"><label>رمز عبور:</label><input type="password" id="userPass" placeholder="••••" style="direction: ltr;"></div>
@@ -149,7 +149,7 @@
             .then(res => {
                 if(res.status === "Success") {
                     currentUser = res.name; 
-                    document.getElementById("userNameDisplay").innerText = res.name.split(" ")[0] + "خوش آمدی، ";
+                    document.getElementById("userNameDisplay").innerText = res.name.split(" ")[0] + "،خوش آمدی " + " عزیز ";
                     document.getElementById("userGradeDisplay").innerText = res.grade + " " + res.field;
                     extractSubjects(res.grade, res.field);
                     document.getElementById("loginScreen").style.display = "none";
