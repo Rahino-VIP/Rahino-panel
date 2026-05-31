@@ -48,7 +48,7 @@
     <div class="container" id="loginScreen">
         <div class="logo-box"><img src="https://via.placeholder.com/150/d97b7b/ffffff?text=Rahino" alt="Rahino"></div>
         <h1>قطب‌نمای راهینو</h1><p class="subtitle">ورود به سیستم رهگیری شخصی</p>
-        <div class="input-group"><label>کد ملی / آیدی:</label><input type="text" id="userId" placeholder="مثال: 0123456789" style="direction: ltr;"></div>
+        <div class="input-group"><label>آیدی:</label><input type="text" id="userId" placeholder="مثال: 0123456789" style="direction: ltr;"></div>
         <div class="input-group"><label>رمز عبور:</label><input type="password" id="userPass" placeholder="••••" style="direction: ltr;"></div>
         <button class="btn btn-primary" onclick="login()" id="loginBtn">تایید و ورود</button>
     </div>
@@ -135,7 +135,7 @@
             }
         }
 
-        const subjectsData = { "دهم": { "ریاضی": ["هندسه 1", "ریاضی 1", "فیزیک 1", "شیمی 1", "فارسی 1", "عربی 1", "دینی 1", "زبان 1"], "تجربی": ["زیست 1", "ریاضی 1", "فیزیک 1", "شیمی 1"], "انسانی": ["ریاضی و آمار 1", "اقتصاد"] }, "یازدهم": { "ریاضی": ["حسابان 1", "هندسه 2", "آمار و احتمال", "فیزیک 2", "شیمی 2"], "تجربی": ["زیست 2", "ریاضی 2", "فیزیک 2", "شیمی 2"], "انسانی": ["علوم و فنون 2"] }, "دوازدهم": { "ریاضی": ["حسابان 2", "هندسه 3", "گسسته", "فیزیک 3", "شیمی 3"], "تجربی": ["زیست 3", "ریاضی 3", "فیزیک 3", "شیمی 3"], "انسانی": ["علوم و فنون 3"] } };
+        const subjectsData = { "دهم": { "ریاضی": ["هندسه 1", "ریاضی 1", "فیزیک 1", "شیمی 1", "فارسی 1", "عربی 1", "دینی 1", "زبان 1"], "تجربی": ["زیست 1", "ریاضی 1", "فیزیک 1", "شیمی 1", "فارسی 1", "عربی 1", "دینی 1", "زبان 1"], "انسانی": ["ریاضی و آمار 1", "اقتصاد", "فارسی 1", "عربی 1", "دینی 1", "زبان 1"] }, "یازدهم": { "ریاضی": ["حسابان 1", "هندسه 2", "آمار و احتمال", "فیزیک 2", "شیمی 2", "فارسی", "عربی", "دینی", "زبان"], "تجربی": ["زیست 2", "ریاضی 2", "فیزیک 2", "شیمی 2", "فارسی", "عربی", "دینی", "زبان"], "انسانی": ["علوم و فنون 2", "فارسی", "عربی", "دینی", "زبان"] }, "دوازدهم": { "ریاضی": ["حسابان 2", "هندسه 1", "ریاضی 1", "فیزیک 1", "شیمی 1", "هندسه 3", "گسسته", "فیزیک 3", "شیمی 3", "فارسی", "عربی", "دینی", "زبان"], "تجربی": ["زیست 3", "ریاضی 3", "فیزیک 3", "شیمی 3", "فارسی", "عربی", "دینی", "زبان"], "انسانی": ["علوم و فنون 3", "فارسی", "عربی", "دینی", "زبان"] } };
         let currentUser = ""; let selectedDate = ""; let courseCount = 0; let globalSubjects = []; 
         let longTermChart = null; let allTimePie = null; let pieChart = null; let testBarChart = null; let aiWeeklyChart = null;
         let userHistoryCache = []; let weeklyAnalysesCache = []; let rawRecordsCache = []; let lastCalendarWeekDates = [];
@@ -149,7 +149,7 @@
             .then(res => {
                 if(res.status === "Success") {
                     currentUser = res.name; 
-                    document.getElementById("userNameDisplay").innerText = "خوش آمدی، " + res.name.split(" ")[0];
+                    document.getElementById("userNameDisplay").innerText = res.name.split(" ")[0] + "خوش آمدی، ";
                     document.getElementById("userGradeDisplay").innerText = res.grade + " " + res.field;
                     extractSubjects(res.grade, res.field);
                     document.getElementById("loginScreen").style.display = "none";
