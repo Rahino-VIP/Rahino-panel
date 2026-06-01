@@ -88,11 +88,35 @@
         <button class="btn btn-primary" style="background: linear-gradient(135deg, #fca311, #e08e0b);" onclick="document.getElementById('weeklyDetailScreen').style.display='none'; document.getElementById('weeklyListScreen').style.display='block';">بازگشت</button>
     </div>
 
+    <!-- روند سالانه (نمودار ترکیبی + دایره‌ای + آمار کل) -->
     <div class="container" id="analyticsScreen">
-        <div class="logo-box"><span style="font-size: 50px;">📊</span></div><h1>روند پیشرفت شما</h1>
-        <div style="background: var(--white); padding: 15px; border-radius: 15px; border: 2px solid var(--green-light); margin-bottom: 20px;"><p style="text-align:center; font-size:12px; font-weight:bold; margin-bottom:10px;">روند مطالعه و تست</p><canvas id="longTermComboChart"></canvas></div>
-        <div style="background: var(--white); padding: 15px; border-radius: 15px; border: 2px solid var(--green-light); margin-bottom: 20px;"><p style="text-align:center; font-size:12px; font-weight:bold; margin-bottom:10px;">سهم دروس</p><canvas id="allTimePieChart"></canvas></div>
-        <p id="chartStatus" style="text-align: center; font-size: 13px; font-weight: bold; display: none;"></p><button class="btn btn-primary" onclick="goToMenu('analyticsScreen')">بازگشت</button>
+        <div class="logo-box"><span style="font-size: 50px;">📊</span></div>
+        <h1>روند پیشرفت شما</h1>
+        
+        <!-- باکس‌های آمار کل -->
+        <div style="display:flex; gap:10px; margin-bottom:20px; margin-top:20px;">
+            <div style="flex:1; background:var(--white); border:2px solid var(--pink); border-radius:15px; padding:15px; text-align:center;">
+                <span style="font-size:24px; display:block; margin-bottom:5px;">⏱️</span>
+                <strong id="totalStudyText" style="color:var(--pink); font-size:20px;">0</strong><br>
+                <small style="color:var(--text-dark); font-weight:bold;">ساعت مطالعه کل</small>
+            </div>
+            <div style="flex:1; background:var(--white); border:2px solid #4ea8de; border-radius:15px; padding:15px; text-align:center;">
+                <span style="font-size:24px; display:block; margin-bottom:5px;">🎯</span>
+                <strong id="totalTestsText" style="color:#4ea8de; font-size:20px;">0</strong><br>
+                <small style="color:var(--text-dark); font-weight:bold;">تست زده شده کل</small>
+            </div>
+        </div>
+
+        <div style="background: var(--white); padding: 15px; border-radius: 15px; border: 2px solid var(--green-light); margin-bottom: 20px;">
+            <p style="text-align:center; font-size:12px; font-weight:bold; margin-bottom:10px;">روند مطالعه و تست (هفته به هفته)</p>
+            <canvas id="longTermComboChart"></canvas>
+        </div>
+        <div style="background: var(--white); padding: 15px; border-radius: 15px; border: 2px solid var(--green-light); margin-bottom: 20px;">
+            <p style="text-align:center; font-size:12px; font-weight:bold; margin-bottom:10px;">سهم دروس از کل زمان</p>
+            <canvas id="allTimePieChart"></canvas>
+        </div>
+        <p id="chartStatus" style="text-align: center; font-size: 13px; font-weight: bold; display: none;"></p>
+        <button class="btn btn-primary" onclick="goToMenu('analyticsScreen')">بازگشت به منو</button>
     </div>
 
     <div class="container" id="dateScreen"><div class="logo-box"><span style="font-size: 50px;">🗓️</span></div><h1>انتخاب روز</h1><div class="input-group"><select id="dateSelect" size="7" style="height: auto; padding: 10px;"></select></div><button class="btn btn-primary" onclick="checkDate()" id="dateBtn">ورود به فرم</button><button class="btn btn-outline" onclick="goToMenu('dateScreen')" style="border:none;">❌ انصراف</button></div>
@@ -135,7 +159,7 @@
             }
         }
 
-        const subjectsData = { "دهم": { "ریاضی": ["هندسه 1", "ریاضی 1", "فیزیک 1", "شیمی 1", "فارسی 1", "عربی 1", "دینی 1", "زبان 1"], "تجربی": ["زیست 1", "ریاضی 1", "فیزیک 1", "شیمی 1", "فارسی 1", "عربی 1", "دینی 1", "زبان 1"], "انسانی": ["ریاضی و آمار 1", "اقتصاد", "فارسی 1", "عربی 1", "دینی 1", "زبان 1"] }, "یازدهم": { "ریاضی": ["حسابان 1", "هندسه 2", "آمار و احتمال", "فیزیک 2", "شیمی 2", "فارسی", "عربی", "دینی", "زبان"], "تجربی": ["زیست 2", "ریاضی 2", "فیزیک 2", "شیمی 2", "فارسی", "عربی", "دینی", "زبان"], "انسانی": ["علوم و فنون 2", "فارسی", "عربی", "دینی", "زبان"] }, "دوازدهم": { "ریاضی": ["حسابان 2", "هندسه 1", "ریاضی 1", "فیزیک 1", "شیمی 1", "هندسه 3", "گسسته", "فیزیک 3", "شیمی 3", "فارسی", "عربی", "دینی", "زبان"], "تجربی": ["زیست 3", "ریاضی 3", "فیزیک 3", "شیمی 3", "فارسی", "عربی", "دینی", "زبان"], "انسانی": ["علوم و فنون 3", "فارسی", "عربی", "دینی", "زبان"] } };
+        const subjectsData = { "دهم": { "ریاضی": ["هندسه 1", "ریاضی 1", "فیزیک 1", "شیمی 1", "فارسی 1", "عربی 1", "دینی 1", "زبان 1", "جغرافیا ایران", "سایر"], "تجربی": ["زیست 1", "ریاضی 1", "فیزیک 1", "شیمی 1", "فارسی 1", "عربی 1", "دینی 1", "زبان 1", "جغرافیا ایران", "سایر"], "انسانی": ["ریاضی و آمار 1", "اقتصاد", "فارسی 1", "عربی 1", "دینی 1", "زبان 1"] }, "یازدهم": { "ریاضی": ["حسابان 1", "هندسه 2", "آمار و احتمال", "فیزیک 2", "شیمی 2", "فارسی", "عربی", "دینی", "زبان", "تاریخ معاصر", "زمین‌شناسی", "سایر"], "تجربی": ["زیست 2", "ریاضی 2", "فیزیک 2", "شیمی 2", "تاریخ معاصر", "زمین‌شناسی", "فارسی", "عربی", "دینی", "زبان", "سایر"], "انسانی": ["علوم و فنون 2", "فارسی", "عربی", "دینی", "زبان"] }, "دوازدهم": { "ریاضی": ["حسابان 2", "هندسه 1", "ریاضی 1", "فیزیک 1", "شیمی 1", "هندسه 3", "گسسته", "فیزیک 3", "شیمی 3", "فارسی", "عربی", "دینی", "زبان"], "تجربی": ["زیست 3", "ریاضی 3", "فیزیک 3", "شیمی 3", "فارسی", "عربی", "دینی", "زبان"], "انسانی": ["علوم و فنون 3", "فارسی", "عربی", "دینی", "زبان"] } };
         let currentUser = ""; let selectedDate = ""; let courseCount = 0; let globalSubjects = []; 
         let longTermChart = null; let allTimePie = null; let pieChart = null; let testBarChart = null; let aiWeeklyChart = null;
         let userHistoryCache = []; let weeklyAnalysesCache = []; let rawRecordsCache = []; let lastCalendarWeekDates = [];
@@ -214,7 +238,15 @@
             let data = weeklyAnalysesCache[index];
             document.getElementById("weeklyListScreen").style.display = "none"; document.getElementById("weeklyDetailScreen").style.display = "block";
             document.getElementById("weeklyTitleText").innerText = data.weekName;
-            let cleanText = data.text.replace(/###/g, '').replace(/##/g, '').replace(/#/g, '').replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--pink); font-size:16px;">$1</strong>').replace(/\*(.*?)\*/g, '<strong style="color:var(--pink); font-size:16px;">$1</strong>');
+            
+            // جادوی گرافیکی برای استخراج ستاره‌ها و تبدیل به متن صورتی
+            let cleanText = data.text
+                .replace(/###\s?(.*)/g, '<h3 style="color:var(--pink); margin-top:10px;">$1</h3>')
+                .replace(/##\s?(.*)/g, '<h2 style="color:var(--pink); margin-top:10px;">$1</h2>')
+                .replace(/#\s?(.*)/g, '<strong style="color:var(--pink); font-size:16px;">$1</strong>')
+                .replace(/\*\*(.*?)\*\*/g, '<strong style="color:var(--pink); font-size:17px; background:var(--pink-light); padding:2px 5px; border-radius:5px;">$1</strong>')
+                .replace(/\*(.*?)\*/g, '<strong style="color:var(--pink); font-size:16px;">$1</strong>');
+            
             document.getElementById("weeklyBodyText").innerHTML = cleanText; 
 
             let weekMatch = data.weekName.match(/(\d{4}\/\d{2}\/\d{2})/g);
@@ -238,6 +270,13 @@
             apiCall("getUserAnalytics", {userName: currentUser}).then(res => {
                 if(res.status === "Success" && res.weekly.labels.length > 0) {
                     document.getElementById("chartStatus").style.display = "none";
+                    
+                    // محاسبه مجموع ساعت مطالعه و تست
+                    let totalS = res.weekly.study.reduce((a, b) => a + b, 0);
+                    let totalT = res.weekly.tests.reduce((a, b) => a + b, 0);
+                    document.getElementById("totalStudyText").innerText = totalS;
+                    document.getElementById("totalTestsText").innerText = totalT;
+
                     longTermChart = new Chart(ctxCombo, { type: 'bar', data: { labels: res.weekly.labels, datasets: [ { type: 'line', label: 'تعداد تست', data: res.weekly.tests, borderColor: '#4ea8de', backgroundColor: '#4ea8de', yAxisID: 'yTests', tension: 0.3, borderWidth: 3 }, { type: 'bar', label: 'ساعت مطالعه', data: res.weekly.study, backgroundColor: '#d97b7b', borderRadius: 4, yAxisID: 'yStudy' } ] }, options: { responsive: true, scales: { yStudy: { type: 'linear', position: 'right', title: {display:true, text:'ساعت'} }, yTests: { type: 'linear', position: 'left', title: {display:true, text:'تست'}, grid: { drawOnChartArea: false } } } } });
                     allTimePie = new Chart(ctxPie, { type: 'doughnut', data: { labels: res.subjects.labels, datasets: [{ data: res.subjects.study, backgroundColor: ['#d97b7b', '#7ca881', '#fca311', '#4ea8de', '#9bb1ff', '#e63946', '#a3b18a', '#1c2541', '#ffb703'], borderWidth: 2 }] } });
                 } else { document.getElementById("chartStatus").innerText = "هنوز گزارش کافی ندارید."; }
@@ -261,8 +300,21 @@
                             pieChart = new Chart(ctxPie, { type: 'doughnut', data: { labels: dayData.courses.map(c => c.name), datasets: [{ data: dayData.courses.map(c => c.edu + c.std), backgroundColor: ['#d97b7b', '#7ca881', '#fca311', '#4ea8de', '#e63946'], borderWidth: 2 }] } });
                             let ctxBar = document.getElementById('barChart').getContext('2d'); if(testBarChart) testBarChart.destroy();
                             testBarChart = new Chart(ctxBar, { type: 'bar', data: { labels: dayData.courses.map(c => c.name), datasets: [{ label: 'تعداد تست', data: dayData.courses.map(c => c.tests), backgroundColor: '#7ca881', borderRadius: 8 }] } });
-                            let textHtml = `<h3 class="section-title" style="margin-top:10px;">📋 ریز نمرات</h3>`;
+                            
+                            // تغییر نام تیتر و اضافه کردن باکس زیبای لایف‌استایل
+                            let textHtml = `<h3 class="section-title" style="margin-top:10px;">📚 عملکرد درسی</h3>`;
                             dayData.courses.forEach(c => { textHtml += `<div style="text-align:right; border:1px solid #ccc; padding:10px; margin-bottom:5px; border-radius:10px;"><strong>📘 ${c.name}</strong><br><small>آموزش: ${c.edu} | مطالعه: ${c.std} | تست: ${c.tests}</small></div>`; });
+                            
+                            if(dayData.life) {
+                                textHtml += `<h3 class="section-title" style="margin-top:15px;">🌿 سبک زندگی</h3>
+                                <div style="text-align:right; border:2px solid var(--pink-light); background:#fffdf5; padding:12px; border-radius:12px; margin-bottom:10px;">
+                                    <small style="color:var(--text-dark); line-height: 2.2; font-size:13px; font-weight:bold;">
+                                        💤 خواب: ${dayData.life.sleepLast} | ⏰ بیداری: ${dayData.life.wakeToday}<br>
+                                        📱 گوشی: ${dayData.life.phone} ساعت | 😴 چرت: ${dayData.life.nap} ساعت<br>
+                                        🎭 روحیه: ${dayData.life.mood}
+                                    </small>
+                                </div>`;
+                            }
                             document.getElementById("dayDetailText").innerHTML = textHtml;
                         };
                         container.appendChild(btn);
@@ -328,15 +380,17 @@
             });
             if(courseData.length === 0) return alert("اطلاعات حداقل یک درس را تنظیم کنید!");
 
-            let finalPayload = {
-                userName: currentUser, reportDate: selectedDate, courses: courseData,
-                lifestyle: { sleepLast: document.getElementById("v_sleepLast").innerText, wakeToday: document.getElementById("v_wakeToday").innerText, nap: document.getElementById("life_nap").value, phone: document.getElementById("life_phone").value, mood: document.getElementById("life_mood").value }
-            };
+            let finalPayload = { userName: currentUser, reportDate: selectedDate, courses: courseData, lifestyle: { sleepLast: document.getElementById("v_sleepLast").innerText, wakeToday: document.getElementById("v_wakeToday").innerText, nap: document.getElementById("life_nap").value, phone: document.getElementById("life_phone").value, mood: document.getElementById("life_mood").value } };
 
             btn.innerText = "در حال انتقال..."; btn.disabled = true;
             
             apiCall("submitComplexReport", finalPayload).then(res => {
-                if (res.status === "Success") { goToMenu('dashboard'); document.getElementById("successScreen").style.display = "block"; document.getElementById("feedbackText").innerText = res.feedback; } 
+                if (res.status === "Success") { 
+                    // مشکل اینجا بود که برطرف شد: داشبورد بسته می‌شود و فقط پیام موفقیت می‌آید
+                    document.getElementById("dashboard").style.display = "none"; 
+                    document.getElementById("successScreen").style.display = "block"; 
+                    document.getElementById("feedbackText").innerText = res.feedback; 
+                } 
                 else { alert("خطا: " + res.message); btn.innerText = "🚀 ثبت نهایی"; btn.disabled = false; }
             }).catch(err => { alert(err.message); btn.innerText = "🚀 ثبت نهایی"; btn.disabled = false; });
         }
