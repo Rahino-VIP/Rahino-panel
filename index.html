@@ -40,6 +40,8 @@
         #homeMenu, #dateScreen, #dashboard, #successScreen, #analyticsScreen, #historyListScreen, #dayDetailScreen, #weeklyListScreen, #weeklyDetailScreen, #requestScreen { display: none; }
         .mood-container { display: flex; justify-content: space-between; gap: 10px; }
         .mood-btn { flex: 1; padding: 15px 5px; border-radius: 16px; background: #fafbfc; border: 2px solid var(--green-light); cursor: pointer; text-align: center; }
+        .mood-btn span { font-size: 28px; display: block; margin-bottom: 5px; }
+        .mood-btn small { font-size: 11px; color: var(--text-dark); font-weight: bold; }
         .mood-btn.active { border-color: var(--pink); background: var(--pink-light); transform: translateY(-5px); box-shadow: 0 6px 15px rgba(217, 123, 123, 0.2); }
     </style>
 </head>
@@ -131,7 +133,16 @@
         <div class="slider-frame"><label>بیداری امروز <span class="val-badge green" id="v_wakeToday">07:00</span></label><input type="range" id="life_wakeToday" min="4" max="12" step="0.5" value="7" oninput="updateTimeLabel(this.value, 'v_wakeToday')"></div>
         <div class="slider-frame"><label>گوشی <span class="val-badge" id="v_phone">1.5 ساعت</span></label><input type="range" id="life_phone" min="0" max="4" step="0.5" value="1.5" oninput="document.getElementById('v_phone').innerText = this.value + (this.value==4?'+':'') + ' ساعت'"></div>
         <div class="slider-frame"><label>چرت <span class="val-badge" id="v_nap">0 ساعت</span></label><input type="range" id="life_nap" min="0" max="4" step="0.5" value="0" oninput="document.getElementById('v_nap').innerText = this.value + (this.value==4?'+':'') + ' ساعت'"></div>
-        <div class="input-group"><label>وضعیت روحی:</label><div class="mood-container"><div class="mood-btn" onclick="setMood(this, 'فوق‌العاده')"><span>✨</span></div><div class="mood-btn active" onclick="setMood(this, 'خوب')"><span>🍃</span></div><div class="mood-btn" onclick="setMood(this, 'خسته')"><span>☕</span></div><div class="mood-btn" onclick="setMood(this, 'بی‌انرژی')"><span>🔋</span></div></div><input type="hidden" id="life_mood" value="خوب"></div>
+        <div class="input-group">
+            <label>وضعیت روحی:</label>
+            <div class="mood-container">
+                <div class="mood-btn" onclick="setMood(this, 'عالی')"><span>🤩</span><small>عالی</small></div>
+                <div class="mood-btn active" onclick="setMood(this, 'خوب')"><span>😊</span><small>خوب</small></div>
+                <div class="mood-btn" onclick="setMood(this, 'معمولی')"><span>🙂</span><small>معمولی</small></div>
+                <div class="mood-btn" onclick="setMood(this, 'بد')"><span>😞</span><small>بد</small></div>
+            </div>
+            <input type="hidden" id="life_mood" value="خوب">
+        </div>
         <button class="btn btn-primary" id="submitBtn" onclick="submitData()">🚀 ثبت نهایی</button><button class="btn btn-outline" style="border:none;" onclick="goToMenu('dashboard')">❌ انصراف</button>
     </div>
 
