@@ -406,14 +406,14 @@
             }).catch(err => { alert(err.message); btn.innerText = "🚀 ثبت نهایی"; btn.disabled = false; });
         }
         // قفل کردن کلیک راست و دکمه‌های کپی
-    document.addEventListener('contextmenu', event => event.preventDefault());
-    document.onkeydown = function(e) {
-        if(e.keyCode == 123) return false; // بستن F12
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // بستن Ctrl+Shift+I
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; // بستن Ctrl+Shift+C
-        if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // بستن Ctrl+Shift+J
-        if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // بستن Ctrl+U (View Source)
-    }
+       document.addEventListener('contextmenu', event => event.preventDefault());
+       document.onkeydown = function(e) {
+            if(e.keyCode == 123) return false; // بستن F12
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // بستن Ctrl+Shift+I
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; // بستن Ctrl+Shift+C
+            if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // بستن Ctrl+Shift+J
+            if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // بستن Ctrl+U (View Source)
+        }
     </script>
 </body>
 </html>
